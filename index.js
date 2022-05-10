@@ -4,13 +4,14 @@ const cors = require("cors");
 const port = process.env.PORT || 9099;
 const mysql = require("mysql")
 const db = mysql.createPool({
-    user: "b2613c98a6a9ac",
+    user: "b2339583a1a018",
     host: "us-cdbr-east-05.cleardb.net",
-    password: "52be5f4b",
-    database: "heroku_69680b6d25e2911"
+    password: "84b18bff",
+    database: "heroku_4a937b3084a1ea2"
 });
 const nodemailer = require('nodemailer');
 //sondah
+//mysql://b2339583a1a018:84b18bff@us-cdbr-east-05.cleardb.net/heroku_4a937b3084a1ea2?reconnect=true
 //https://ax-traffic.herokuapp.com
 //mysql://b2613c98a6a9ac:52be5f4b@us-cdbr-east-05.cleardb.net/heroku_69680b6d25e2911?reconnect=true
 app.use(cors());
