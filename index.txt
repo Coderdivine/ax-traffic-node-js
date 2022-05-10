@@ -1,0 +1,26 @@
+ `                
+<div>
+<div id="header" style="text-align:center;background:#d2691e;color:#fff;padding:5px 12px;border-radius:5px;font-style:sans-serif;">
+<h1>AXGURA</h1>
+</div>
+<section id="body" style="margin:0;padding:0;box-sizing:border-box;background:whitesmoke;border-radius:6px;padding:6px 18px;font-style:sans-serif;">
+<small style="font-style:sans-serif;">New booking from:</small>
+<h2 style="color:#2596be;font-size:2;">${firstname}</h2>
+<p style="padding:1px 7px;margin:5px;color:#2596be;"><label style="font-size:14px;font-weight:400;padding:1px 5px">Lastname: </label>${lastname}</p>
+<p style="padding:1px 7px;margin:5px;color:#2596be;"><label style="font-size:14px;font-weight:400;padding:1px 5px">CompanyName: </label>${companyname}</p>
+<p style="padding:1px 7px;margin:5px;color:#2596be;"><label style="font-size:14px;font-weight:400;padding:1px 5px">Phone Number: </label>${phone}</p>
+<p style="padding:1px 7px;margin:5px;color:#2596be;"><label style="font-size:14px;font-weight:400;padding:1px 5px">Email: </label>${email}</p>
+<p style="padding:1px 7px;margin:5px;color:#2596be;"><label style="font-size:14px;font-weight:400;padding:1px 5px">Country:</label>${country}</p>
+<p style="padding:1px 7px;margin:5px;color:#2596be;"><label style="font-size:14px;font-weight:400;padding:1px 5px">State:</label>${state}</p>
+<p style="padding:1px 7px;margin:5px;color:#2596be;"><label style="font-size:14px;font-weight:400;padding:1px 5px">Address:</label>${address}</p>
+<p style="padding:1px 7px;margin:5px;color:#2596be;"><label style="font-size:14px;font-weight:400;padding:1px 5px">Service:</label>${service}</p>
+<p style="padding:1px 7px;margin:5px;color:#2596be;"><label style="font-size:14px;font-weight:400;padding:1px 5px">Message: </label><br>
+${message}
+</p>
+<p style="padding:1px 7px;margin:5px;color:#2596be;"><label style="font-size:14px;font-weight:400;padding:1px 5px">Date:${date}</p><br/>
+<hr>
+<img src="https://sabinwa.herokuapp.com/uploads/${img}" alt="sabinus" style="width:100%;height:45vh;border:0;border-radius:7px;" />
+<a href="https://sabinwa.netlify.app" style="padding:12px 18px;margin:13px 6px;background:#2596be;border:0;border-radius:6px;text-decoration:none;color:white;text-align:center;" >Visit Website</a>
+</section>
+
+</div>`
