@@ -3,11 +3,12 @@ const app = express();
 const cors = require("cors");
 const port = process.env.PORT || 9099;
 const mysql = require("mysql")
+require("dotenv").config();
 const db = mysql.createPool({
-    user: "b2339583a1a018",
-    host: "us-cdbr-east-05.cleardb.net",
-    password: "84b18bff",
-    database: "heroku_4a937b3084a1ea2"
+    user: process.env.AUTH_PASS_USER,
+    host: process.env.AUTH_PASS_HOST,
+    password: process.env.AUTH_PASS_PASSWORD,
+    database: process.env.AUTH_PASS_DATABASE
 });
 const nodemailer = require('nodemailer');
 //sondah
@@ -164,7 +165,7 @@ app.post("/post-data/:pass",(req,res)=>{
     })
    
 });
-app.get("get-data/:pass",(req,res)=>{
+app.get("/get-data/:pass",(req,res)=>{
     if(req.params.id!=="passed"){
         return
     };
