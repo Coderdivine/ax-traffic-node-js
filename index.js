@@ -63,9 +63,11 @@ app.post("/post-user/:pass",(req,res)=>{
         return
     }
     const { username,email,phone,password,long,lat,verified,img,date,ads } = req.body;
-    db.query('INSERT INTO user_db (username,email,phone,password,long,lat,verified,img,date,ads )VALUES(?,?,?,?,?,?,?,?,?,?)',[username,email,phone,password,long,lat,verified,img,date,ads ],(err,result)=>{
+    const verify = verified
+    db.query('INSERT INTO user_db (username,email,phone,password,long,lat,verify,img,date,ads )VALUES(?,?,?,?,?,?,?,?,?,?)',[username,email,phone,password,long,lat,verify,img,date,ads],(err,result)=>{
             if(err){
-                res.send("please check your internet connection")
+                console.log(err)
+                res.send(false)
             }else{
                 const id = result[0].id;
                 let messaged = {
@@ -103,7 +105,7 @@ app.post("/user-login/:pass",(req,res)=>{
     const {username,password} = req.body;
     db.query(`SELECT * FROM user_db WHERE (username = '${username}' AND password = '${password}')`,(err,result)=>{
             if(err){
-                res.send("please check your internet connection")
+                res.send(false)
             }else{
                 res.send("Login sucessful")
             }
@@ -130,7 +132,7 @@ app.get("/get-users/:pass",(req,res)=>{
     const QUERY = `SELECT * FROM user_db`;
     db.query(QUERY,(err,result)=>{
        if(err){
-           res.send(err);
+           res.send(false);
        }
        else{
            res.send(result)
@@ -155,10 +157,10 @@ app.post("/post-data/:pass",(req,res)=>{
     if(req.params.pass!=="passed"){
         return
     }
-    const { period,time,lon,lat,date,avg } = req.body;
+    const { period,time,lon,lat,date,avg} = req.body;
     db.query('INSERT INTO data_db (period,time,lon,lat,date,avg )VALUES(?,?,?,?,?,?)',[period,time,lon,lat,date,avg ],(err,result)=>{
             if(err){
-                res.send("please check your internet connection")
+                res.send(false)
             }else{
                 res.send("Posted")
             }
