@@ -19,26 +19,20 @@ app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 //products
-const passwords ={
-    "1":"chimdindu1234",
-    "2":"chimdindu12345",
-    "3":"chimdindu123",
-    "4":"chimdindu1212"
-}
 const english = {
-    low:[
+    "low":[
         {name:"name",
-        message:"Your adviced to stay at a spedd of",
+        message:"Your adviced to stay at a speed of",
         by:"CHIMDI.AI"
         }
     ],
-    normal:[
+    "normal":[
         {name:"name",
         message:"Your adviced to stay at a spedd of",
          by:"CHIMDI.AI"
         }
     ],
-    high:[
+    "high":[
         {name:"name",
         message:"Your adviced to stay at a spedd of",
          by:"CHIMDI.AI"
@@ -58,13 +52,11 @@ let emailTransporter = nodemailer.createTransport({
 app.get("/english",(req,res)=>{
     res.send(english)
 })
-app.post("/post-user/:pass",(req,res)=>{
-    if(req.params.pass!=="passed"){
-        return
-    }
-    const { username,email,phone,password,long,lat,verified,img,date,ads } = req.body;
-    const verify = verified
-    db.query('INSERT INTO user_db (username,email,phone,password,long,lat,verify,img,date,ads )VALUES(?,?,?,?,?,?,?,?,?,?)',[username,email,phone,password,long,lat,verify,img,date,ads],(err,result)=>{
+app.post("/post-user",(req,res)=>{
+    
+    const { username,email,phone,password,long,lat,verified,img,date,ads} = req.body;
+
+    db.query('INSERT INTO user_db (username,email,phone,password,long,lat,verified,img,date,ads)VALUES(?,?,?,?,?,?,?,?,?,?)',[username,email,phone,password,long,lat,verified,img,date,ads],(err,result)=>{
             if(err){
                 console.log(err)
                 res.send(false)
@@ -107,7 +99,7 @@ app.post("/user-login/:pass",(req,res)=>{
             if(err){
                 res.send(false)
             }else{
-                res.send("Login sucessful")
+                res.send(result)
             }
     })
    
@@ -144,8 +136,8 @@ app.post("/user-update/:pass/:id",(req,res)=>{
             return
     }
     const id  = req.params.id;
-    const {long,lat,email,phone}  = req.body;
-    db.query(`UPDATE products SET (long = ?, lat = ?, email = ?, phone = ?) WHERE id = ?`,[long,lat,email,phone,id],(err,result)=>{
+    const {phone,img}  = req.body;
+    db.query(`UPDATE products SET (img = ?, phone = ?) WHERE id = ?`,[img,phone,id],(err,result)=>{
         if(err){
             res.send(`An error occured please try again later \n err:${err}`)
         }else{
@@ -173,13 +165,9 @@ app.get("/get-data/:pass",(req,res)=>{
     };
     db.query("SELECT * FROM data_db",(err,result)=>{
         if(err){
-            res.send("Please check your internet connection")
+            res.send(false)
         }else{
-                    res.send(
-                        {
-                            "data":result
-                        }
-                    )
+                    res.send(data)
         }
     })
 })
