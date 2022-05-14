@@ -5,16 +5,14 @@ const port = process.env.PORT || 9099;
 const mysql = require("mysql")
 require("dotenv").config();
 const db = mysql.createPool({
-    user: process.env.AUTH_PASS_USER,
-    host: process.env.AUTH_PASS_HOST,
-    password: process.env.AUTH_PASS_PASSWORD,
-    database: process.env.AUTH_PASS_DATABASE
+    user:process.env.AUTH_PASS_USER,
+    host:process.env.AUTH_PASS_HOST,
+    password:process.env.AUTH_PASS_PASSWORD,
+    database:process.env.AUTH_PASS_DATABASE
 });
 const nodemailer = require('nodemailer');
-//sondah
-//mysql://b2339583a1a018:84b18bff@us-cdbr-east-05.cleardb.net/heroku_4a937b3084a1ea2?reconnect=true
 //https://ax-traffic.herokuapp.com
-//mysql://b2613c98a6a9ac:52be5f4b@us-cdbr-east-05.cleardb.net/heroku_69680b6d25e2911?reconnect=true
+//mysql://b2339583a1a018:84b18bff@us-cdbr-east-05.cleardb.net/heroku_4a937b3084a1ea2?reconnect=true
 app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
@@ -53,10 +51,9 @@ app.get("/english",(req,res)=>{
     res.send(english)
 })
 app.post("/post-user",(req,res)=>{
-    
-    const { username,email,phone,password,long,lat,verified,img,date,ads} = req.body;
+    const {username,email,phone,password,long,lat,verified,img,date,ads} = req.body;
 
-    db.query('INSERT INTO user_db (username,email,phone,password,longitude,latitude,verified,img,date,ads)VALUES(?,?,?,?,?,?,?,?,?,?)',[username,email,phone,password,long,lat,verified,img,date,ads],(err,result)=>{
+    db.query('INSERT INTO userdb (username,email,phone,password,longitude,latitude,verified,img,date,ads)VALUES(?,?,?,?,?,?,?,?,?,?)',[username,email,phone,password,long,lat,verified,img,date,ads],(err,result)=>{
             if(err){
                 console.log(err)
                 res.send(false)
@@ -95,7 +92,7 @@ app.post("/user-login/:pass",(req,res)=>{
         return
     }
     const {username,password} = req.body;
-    db.query(`SELECT * FROM user_db WHERE (username = '${username}' AND password = '${password}')`,(err,result)=>{
+    db.query(`SELECT * FROM userdb WHERE (username = '${username}' AND password = '${password}')`,(err,result)=>{
             if(err){
                 res.send(false)
             }else{
@@ -107,7 +104,7 @@ app.post("/user-login/:pass",(req,res)=>{
 app.get("/verify-user/:pass/:id",(req,res)=>{
     const {pass,id}=req.params;
     const verify = "true"
-    db.query(`UPDATE user_db SET (verify = ?)WHERE id = ${id} ?`,[verify],(err,result)=>{
+    db.query(`UPDATE userdb SET (verify = ?)WHERE id = ${id} ?`,[verify],(err,result)=>{
             if(err){
                 return
             }else{
@@ -121,7 +118,7 @@ app.get("/get-users/:pass",(req,res)=>{
     if(req.params.pass!=="passeded"){
         return
     }
-    const QUERY = `SELECT * FROM user_db`;
+    const QUERY = `SELECT * FROM userdb`;
     db.query(QUERY,(err,result)=>{
        if(err){
            res.send(false);
@@ -131,13 +128,14 @@ app.get("/get-users/:pass",(req,res)=>{
        }
     })
 });
+//no value
 app.post("/user-update/:pass/:id",(req,res)=>{
     if(req.params.pass!=="passed"){
             return
     }
     const id  = req.params.id;
     const {phone,img}  = req.body;
-    db.query(`UPDATE products SET (img = ?, phone = ?) WHERE id = ?`,[img,phone,id],(err,result)=>{
+    db.query(`UPDATE userdb SET (phone = ?, img = ?) WHERE id = ?`,[img,phone,id],(err,result)=>{
         if(err){
             res.send(`An error occured please try again later \n err:${err}`)
         }else{
@@ -150,7 +148,7 @@ app.post("/post-data/:pass",(req,res)=>{
         return
     }
     const { period,time,lon,lat,date,avg} = req.body;
-    db.query('INSERT INTO data_db (period,time,lon,lat,date,avg )VALUES(?,?,?,?,?,?)',[period,time,lon,lat,date,avg ],(err,result)=>{
+    db.query('INSERT INTO datadb (period,time,longs,lat,date,avg )VALUES(?,?,?,?,?,?)',[period,time,lon,lat,date,avg ],(err,result)=>{
             if(err){
                 res.send(false)
             }else{
@@ -163,7 +161,7 @@ app.get("/get-data/:pass",(req,res)=>{
     if(req.params.id!=="passed"){
         return
     };
-    db.query("SELECT * FROM data_db",(err,result)=>{
+    db.query("SELECT * FROM datadb",(err,result)=>{
         if(err){
             res.send(false)
         }else{
@@ -172,5 +170,5 @@ app.get("/get-data/:pass",(req,res)=>{
     })
 })
 app.listen(port, () => {
-    console.log(`Yey Server is running on http://localhost:${port}`);
+    console.log(`Host now -00 on http://localhost:${port}`);
 }) 
