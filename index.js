@@ -56,7 +56,7 @@ app.post("/post-user",(req,res)=>{
     
     const { username,email,phone,password,long,lat,verified,img,date,ads} = req.body;
 
-    db.query('INSERT INTO user_db (username,email,phone,password,long,lat,verified,img,date,ads)VALUES(?,?,?,?,?,?,?,?,?,?)',[username,email,phone,password,long,lat,verified,img,date,ads],(err,result)=>{
+    db.query('INSERT INTO user_db (username,email,phone,password,longitude,latitude,verified,img,date,ads)VALUES(?,?,?,?,?,?,?,?,?,?)',[username,email,phone,password,long,lat,verified,img,date,ads],(err,result)=>{
             if(err){
                 console.log(err)
                 res.send(false)
