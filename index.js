@@ -158,7 +158,7 @@ app.post("/post-data/:pass",(req,res)=>{
    
 });
 app.get("/get-data/:pass",(req,res)=>{
-    if(req.params.id!=="passed"){
+    if(req.params.pass!=="passed"){
         return
     };
     db.query("SELECT * FROM datadb",(err,result)=>{
