@@ -165,7 +165,7 @@ app.get("/get-data/:pass",(req,res)=>{
         if(err){
             res.send(false)
         }else{
-                    res.send(data)
+         res.send(data)
         }
     })
 })
