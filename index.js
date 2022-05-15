@@ -17,27 +17,72 @@ app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 //products
-const english = {
+const english =[{
     "low":[
-        {name:"name",
-        message:"Your adviced to stay at a speed of",
-        by:"CHIMDI.AI"
+        {
+          one:"One to say",
+          two:"Two to say",
+          continue:true,
+          three:"Three to say",
+          four:"Four to say"
+        },
+        {
+          one:"One to say",
+          two:"Two to say",
+          continue:true,
+          three:"Three to say",
+          four:"Four to say"
+        },
+        {
+          one:"One to say",
+          two:"Two to say",
+          continue:true,
+          three:"Three to say",
+          four:"Four to say"
+        },
+        {
+          one:"One to say",
+          two:"Two to say",
+          continue:true,
+          three:"Three to say",
+          four:"Four to say"
         }
+
     ],
     "normal":[
-        {name:"name",
-        message:"Your adviced to stay at a spedd of",
-         by:"CHIMDI.AI"
-        }
+      {
+        one:"One to say normal",
+        two:"Two to say normal",
+        continue:true,
+        three:"Three to say normal",
+        four:"Four to say normal"
+      },
+      {
+        one:"One to say normal",
+        two:"Two to say normal",
+        continue:true,
+        three:"Three to say normal",
+        four:"Four to say normal"
+      }
     ],
     "high":[
-        {name:"name",
-        message:"Your adviced to stay at a spedd of",
-         by:"CHIMDI.AI"
-        }
+      {
+        one:"One to say high",
+        two:"Two to say high",
+        continue:true,
+        three:"Three to say high",
+        four:"Four to say high"
+      },
+      {
+        one:"One to say high",
+        two:"Two to say high",
+        continue:true,
+        three:"Three to say high",
+        four:"Four to say high"
+      }
     ]
          
-}
+}]
 let emailTransporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -58,7 +103,13 @@ app.post("/post-user",(req,res)=>{
                 console.log(err)
                 res.send(false)
             }else{
-                const id = result[0].id;
+            
+            db.query(`SELECT * FROM userdb WHERE (username = '${username}' AND password = '${password}')`,(err,result)=>{
+                    if(err){
+                        res.send(false)
+                    }else{
+                     const id = result[0].id;
+                   
                 let messaged = {
                     from: "axgurah@gmail.com",
                     to: email,
@@ -78,14 +129,17 @@ app.post("/post-user",(req,res)=>{
                 emailTransporter.sendMail(messaged, function (err, data) {
                     if (err) {
                         console.log(err);
-        
+                        res.send(err)
                     } else {
                         res.send("Please check your email to verify your account.")
                     }
                 })
             }
-    })
-   
+                    
+        })
+            
+            }
+    })  
 });
 app.post("/user-login/:pass",(req,res)=>{
     if(req.params.pass!=="passed"){
@@ -165,7 +219,7 @@ app.get("/get-data/:pass",(req,res)=>{
         if(err){
             res.send(false)
         }else{
-         res.send(data)
+         res.send(result)
         }
     })
 })
