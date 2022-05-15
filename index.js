@@ -128,7 +128,7 @@ app.get("/get-users/:pass",(req,res)=>{
        }
     })
 });
-//no value
+//no valuenso
 app.post("/user-update/:pass/:id",(req,res)=>{
     if(req.params.pass!=="passed"){
             return
@@ -145,7 +145,7 @@ app.post("/user-update/:pass/:id",(req,res)=>{
 });
 app.post("/post-data/:pass",(req,res)=>{
     if(req.params.pass!=="passed"){
-        return
+        console.log("passed")
     }
     const { period,time,lon,lat,date,avg} = req.body;
     db.query('INSERT INTO datadb (period,time,longs,lat,date,avg )VALUES(?,?,?,?,?,?)',[period,time,lon,lat,date,avg ],(err,result)=>{
@@ -159,7 +159,7 @@ app.post("/post-data/:pass",(req,res)=>{
 });
 app.get("/get-data/:pass",(req,res)=>{
     if(req.params.pass!=="passed"){
-        return
+        res.send("passed")
     };
     db.query("SELECT * FROM datadb",(err,result)=>{
         if(err){
