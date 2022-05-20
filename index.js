@@ -113,7 +113,7 @@ app.post("/post-user",(req,res)=>{
                 let messaged = {
                     from: "axgurah@gmail.com",
                     to: email,
-                    subject: `verification link`,
+                    subject: `verification link from ax-traffic`,
                     html: `                
                     <div>
                     <div id="header" style="text-align:center;background:#d2691e;color:#fff;padding:5px 12px;border-radius:5px;font-style:sans-serif;">
@@ -121,15 +121,14 @@ app.post("/post-user",(req,res)=>{
                     </div>
                     <section id="body" style="margin:0;padding:0;box-sizing:border-box;background:whitesmoke;border-radius:6px;padding:6px 18px;font-style:sans-serif;">
                     <small style="font-style:sans-serif;">Your verification link</small>
-                    <a href="https://ax-traffic.herokuapp.com/verify-user/passed/${id}" style="padding:12px 18px;margin:13px 6px;background:#2596be;border:0;border-radius:6px;text-decoration:none;color:white;text-align:center;" >Visit Website</a>
+                    <a href="https://ax-traffic.herokuapp.com/verify-user/passed/${id}" style="padding:12px 18px;margin:13px 6px;margin-top:18px;background:#2596be;border:0;border-radius:6px;text-decoration:none;color:white;text-align:center;" >Visit Website</a>
                     </section>
                     
                     </div>`
                 };
                 emailTransporter.sendMail(messaged, function (err, data) {
                     if (err) {
-                        console.log(err);
-                        res.send(err)
+                        console.log(err)
                     } else {
                         res.send("Please check your email to verify your account.")
                     }
@@ -158,7 +157,7 @@ app.post("/user-login/:pass",(req,res)=>{
 app.get("/verify-user/:pass/:id",(req,res)=>{
     const {pass,id}=req.params;
     const verify = "true"
-    db.query(`UPDATE userdb SET (verify = ?)WHERE id = ${id} ?`,[verify],(err,result)=>{
+    db.query(`UPDATE userdb SET (verify = '${verify}')WHERE id = ${id}`,(err,result)=>{
             if(err){
                 return
             }else{
