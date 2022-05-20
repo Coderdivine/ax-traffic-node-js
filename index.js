@@ -144,11 +144,12 @@ app.post("/user-login/:pass",(req,res)=>{
         return
     }
     const {username,password} = req.body;
-    db.query(`SELECT * FROM userdb WHERE (username = '${username}' AND password = '${password}')`,(err,result)=>{
+    db.query(`SELECT * FROM userdb WHERE (email = '${username}' AND password = '${password}')`,(err,result)=>{
             if(err){
                 res.send(false)
             }else{
                 res.send(result)
+                console.log(result)
             }
     })
    
