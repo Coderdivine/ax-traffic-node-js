@@ -157,7 +157,7 @@ app.post("/user-login/:pass",(req,res)=>{
 app.get("/verify-user/:pass/:id",(req,res)=>{
     const {pass,id}=req.params;
     const verify = "true"
-    db.query(`UPDATE userdb SET (verify = '${verify}')WHERE id = ${id}`,(err,result)=>{
+    db.query(`UPDATE userdb SET verify = '${verify}' WHERE id = ${id}`,(err,result)=>{
             if(err){
                 return
             }else{
@@ -188,7 +188,7 @@ app.post("/user-update/:pass/:id",(req,res)=>{
     }
     const id  = req.params.id;
     const {phone,img}  = req.body;
-    db.query(`UPDATE userdb SET (phone = ?, img = ?) WHERE id = ?`,[img,phone,id],(err,result)=>{
+    db.query(`UPDATE userdb SET (phone = ${phone}, img = ${img}) WHERE id = ${id}`,(err,result)=>{
         if(err){
             res.send(`An error occured please try again later \n err:${err}`)
         }else{
