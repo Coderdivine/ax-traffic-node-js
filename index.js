@@ -5,10 +5,10 @@ const port = process.env.PORT || 9099;
 const mysql = require("mysql")
 require("dotenv").config();
 const db = mysql.createPool({
-    user:process.env.AUTH_PASS_USER,
-    host:process.env.AUTH_PASS_HOST,
-    password:process.env.AUTH_PASS_PASSWORD,
-    database:process.env.AUTH_PASS_DATABASE
+    user:"b2339583a1a018",
+    host:"us-cdbr-east-05.cleardb.net",
+    password:"84b18bff",
+    database:"heroku_4a937b3084a1ea2"
 });
 const nodemailer = require('nodemailer');
 //https://ax-traffic.herokuapp.com
@@ -86,8 +86,8 @@ const english =[{
 let emailTransporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: process.env.AUTH_PASS_EMAIL,
-        pass: process.env.AUTH_PASS_PASSWORD
+        user: "axgurah@gmail.com",
+        pass: "chimdindu@2"
     }
 });
 //post routes
