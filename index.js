@@ -100,7 +100,6 @@ app.post("/post-user",(req,res)=>{
 
     db.query('INSERT INTO userdb (username,email,phone,password,longitude,latitude,verified,img,date,ads)VALUES(?,?,?,?,?,?,?,?,?,?)',[username,email,phone,password,long,lat,verified,img,date,ads],(err,result)=>{
             if(err){
-                console.log(err)
                 res.send(false)
             }else{
             
@@ -161,8 +160,8 @@ app.get("/verify-user/:pass/:id",(req,res)=>{
             if(err){
                 return
             }else{
-                //res.send('Your account is verified \n you can go back to the home page')
-                res.redirect("https://ax-traffic.axgura.com")
+                res.send('Your account is verified. \n You can go back to your home page')
+                //res.redirect("https://ax-traffic.axgura.com")
             }
     })
 
