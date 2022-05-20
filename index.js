@@ -153,15 +153,15 @@ app.post("/user-login/:pass",(req,res)=>{
     })
    
 });
-app.get("/verify-user//:id",(req,res)=>{
+app.get("/verify-user/:id",(req,res)=>{
     const {id}=req.params;
     const verify = "true"
     db.query(`UPDATE userdb SET verified = '${verify}' WHERE id = ${id}`,(err,result)=>{
             if(err){
                 return
             }else{
-                res.send('Your account is verified. \n You can go back to your home page')
-                //res.redirect("https://ax-traffic.axgura.com")
+              //  res.send('Your account is verified. \n You can go back to your home page')
+                res.redirect("https://ax-traffic.axgura.com/auth")
             }
     })
 
