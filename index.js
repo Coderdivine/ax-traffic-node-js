@@ -188,11 +188,11 @@ app.post("/user-update/:pass/:id",(req,res)=>{
     }
     const id  = req.params.id;
     const {phone,img}  = req.body;
-    db.query(`UPDATE userdb SET (phone = ${phone}, img = ${img}) WHERE id = ${id}`,(err,result)=>{
+    db.query(`UPDATE userdb SET (phone = '${phone}', img = '${img}') WHERE id = ${id}`,(err,result)=>{
         if(err){
             res.send(`An error occured please try again later \n err:${err}`)
         }else{
-                    res.send("Update successful")
+         res.send("Update successful")
         }
     })
 });
